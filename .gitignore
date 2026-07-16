@@ -1,0 +1,14 @@
+node_modules/
+dist/
+backend/crm.db
+backend/crm.db-journal
+backend/crm.db-wal
+backend/crm.db-shm
+.edge_profile/
+.edge_profile_unique/
+.edge_profile_unique_screenshot/
+*.log
+.DS_Store
+.env
+.idea/
+.vscode/

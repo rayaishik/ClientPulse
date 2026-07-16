@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Feedback - RetailCRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#263143",
+                        "inverse-surface": "#d4e4fa",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#004c69",
+                        "outline-variant": "#3c4a46",
+                        "on-tertiary-fixed": "#001e2c",
+                        "surface-variant": "#273647",
+                        "secondary-container": "#3e495d",
+                        "surface-container-lowest": "#010f1f",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#3cddc7",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "secondary-fixed": "#d8e3fb",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#5ec9ff",
+                        "tertiary": "#afe0ff",
+                        "on-surface": "#d4e4fa",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed": "#c4e7ff",
+                        "outline": "#859490",
+                        "on-tertiary": "#00354a",
+                        "on-secondary-container": "#aeb9d0",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-bright": "#2c3a4c",
+                        "inverse-on-surface": "#233143",
+                        "tertiary-fixed-dim": "#7bd0ff",
+                        "inverse-primary": "#006b5f",
+                        "surface-dim": "#051424",
+                        "on-tertiary-container": "#005371",
+                        "primary-fixed-dim": "#3cddc7",
+                        "on-background": "#d4e4fa",
+                        "background": "#051424",
+                        "primary-fixed": "#62fae3",
+                        "on-primary": "#003731",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "error": "#ffb4ab",
+                        "surface-container": "#122131",
+                        "secondary": "#bcc7de",
+                        "surface": "#051424",
+                        "primary-container": "#2dd4bf",
+                        "on-primary-container": "#00574d",
+                        "surface-container-highest": "#273647",
+                        "on-primary-fixed": "#00201c",
+                        "primary": "#57f1db",
+                        "on-surface-variant": "#bacac5",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "container-margin": "40px",
+                        "gutter": "20px",
+                        "xs": "4px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Base Styles and Resets */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            margin: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-panel-elevated {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-input {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: theme('colors.on-surface');
+            transition: all 0.3s ease;
+        }
+        
+        .glass-input:focus {
+            border-color: theme('colors.primary');
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(87, 241, 219, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-button-primary {
+            background: linear-gradient(135deg, theme('colors.primary-container') 0%, theme('colors.inverse-primary') 100%);
+            color: theme('colors.on-primary-container');
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-button-primary:hover {
+            box-shadow: 0 4px 15px rgba(87, 241, 219, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .glass-button-ghost {
+            background-color: transparent;
+            color: theme('colors.primary');
+            border: 1px solid rgba(87, 241, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-button-ghost:hover {
+            background-color: rgba(87, 241, 219, 0.1);
+            border-color: theme('colors.primary');
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Star Rating Colors */
+        .star-active {
+            color: theme('colors.primary');
+        }
+        .star-inactive {
+            color: theme('colors.surface-variant');
+        }
+
+        /* Background ambient effect */
+        .ambient-glow {
+            position: fixed;
+            top: 20%;
+            left: 30%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(87,241,219,0.03) 0%, rgba(5,20,36,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        .ambient-glow-2 {
+            position: fixed;
+            bottom: 10%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(175,224,255,0.02) 0%, rgba(5,20,36,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-on-surface selection:bg-primary/30 selection:text-primary-fixed">
+<div class="ambient-glow"></div>
+<div class="ambient-glow-2"></div>
+<!-- SideNavBar Component -->
+<nav class="fixed left-0 top-0 h-full w-64 bg-surface dark:bg-surface flex flex-col py-lg overflow-y-auto bg-white/5 backdrop-blur-xl border-r border-white/10 shadow-xl z-50">
+<!-- Brand / Header -->
+<div class="px-container-margin mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md font-bold dark:text-primary">storefront</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary leading-tight">RetailCRM</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Hub</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex-1 flex flex-col gap-1 px-4">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="font-label-md text-label-md">Products</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="font-label-md text-label-md">Payments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+<span class="font-label-md text-label-md">Support Tickets</span>
+</a>
+</li>
+<!-- ACTIVE TAB -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary bg-primary-container/20 border-r-4 border-primary shadow-[0_0_15px_rgba(87,241,219,0.3)] rounded-l-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="font-label-md text-label-md">Feedback</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<span class="font-label-md text-label-md">Employees</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="font-label-md text-label-md">Activity Log</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</li>
+</ul>
+<!-- User Profile Avatar area at bottom of nav -->
+<div class="mt-auto px-6 pt-6 border-t border-white/5">
+<div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-white/10" data-alt="A small circular avatar image showing a professional administrator portrait, modern lighting, dark background, highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Fpa3X8K5jb1xfzwDJBlFt26iGIwg8AoU91kt-5uK-0u_IvCm1vjTsjVT6Q_qcRjTP5yknC0yz4NdslDoyYMi-F_pFkTkd7v-IXnCPpAvcEs19E3QQlQlUkl_f4sR_3pPLuKvsflKER0N93P2K5Tp_l2VRfGy93p9dB7axfp7pLS9WFTnjBh7y68V2G84gnloF7GMqQHrqSWh4XYoi6jo1qonYt1-WoeIfLRYU4e7A8B1yt1GfQT51wySnIy6wzj92AUGbIKltx4"/>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Admin User</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] truncate">admin@retailcrm.com</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_vert</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-64 w-[calc(100%-16rem)]">
+<!-- TopNavBar Component -->
+<header class="bg-transparent docked full-width top-0 sticky z-40 bg-surface/30 backdrop-blur-md border-b border-white/5 shadow-sm flex justify-between items-center px-container-margin py-md h-[72px]">
+<!-- Left: Search (search_bar: on_left) -->
+<div class="flex-1 max-w-md">
+<div class="relative focus-within:ring-2 focus-within:ring-primary/50 rounded-lg transition-shadow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full glass-input rounded-lg pl-10 pr-4 py-2 font-body-sm text-body-sm placeholder:text-on-surface-variant/60 focus:ring-0" placeholder="Search feedback, customers, or orders..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center gap-4">
+<!-- Trailing Icon Actions -->
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 rounded-full p-2 transition-colors relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-[0_0_5px_rgba(87,241,219,0.8)]"></span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+</button>
+<!-- Divider -->
+<div class="w-px h-6 bg-white/10 mx-2"></div>
+<!-- Profile / Primary Action -->
+<div class="flex items-center gap-3 cursor-pointer hover:bg-white/5 p-1.5 rounded-lg transition-colors">
+<span class="font-label-md text-label-md text-on-surface">Admin</span>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full object-cover border border-white/20" data-alt="A small circular avatar image showing a professional administrator portrait, modern lighting, dark background, highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ26yWpUjCWj6K3_wtLiMNyW_E6dton9e9ttx0WV6E8DlhbwXixDp10pGdYhyQ1dzciMdrx4dZfTXVcBP7HvQan1ntRnRT-YnpQ-y-OJLfy7th_Pf2_Unm2Pn0vZO_Wgrbw0hPUVg38-VCXpxAeL45nYszSB8h9QhNe8jD1IeQlw6Gna0Qg7RyE3VndiWxBCqNypNGBamqQHa6O154EOiRDhJYrDwJW6mbGzvVAIqftLihShLz1AabqEBRtTxAPNGIVCI3ZB08uFo"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Customer Feedback</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Monitor and respond to customer reviews and sentiments.</p>
+</div>
+<div class="flex gap-3">
+<button class="glass-button-ghost font-label-md text-label-md px-4 py-2 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export CSV
+                    </button>
+<button class="glass-button-primary font-label-md text-label-md px-4 py-2 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Advanced Filters
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Dashboard Metrics & Main Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Metrics & Filters (4 columns) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Sentiment Summary Card -->
+<div class="glass-panel rounded-xl p-lg relative overflow-hidden">
+<!-- Decorative wash -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sentiment_satisfied</span>
+                            Average Sentiment
+                        </h3>
+<div class="flex items-end gap-4 mb-4">
+<span class="font-display-lg text-display-lg text-on-surface leading-none">4.8</span>
+<div class="flex gap-1 pb-1">
+<span class="material-symbols-outlined star-active text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[20px] opacity-50" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Based on 1,248 reviews in the last 30 days. <span class="text-primary">+0.2 from last month</span>.</p>
+<!-- Mini Bar Chart (CSS drawn) -->
+<div class="mt-6 flex flex-col gap-2">
+<div class="flex items-center gap-3 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2">5</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+<span class="w-8 text-right">75%</span>
+</div>
+<div class="flex items-center gap-3 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2">4</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 15%"></div>
+</div>
+<span class="w-8 text-right">15%</span>
+</div>
+<div class="flex items-center gap-3 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2">3</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 5%"></div>
+</div>
+<span class="w-8 text-right">5%</span>
+</div>
+</div>
+</div>
+<!-- Quick Filters Card -->
+<div class="glass-panel rounded-xl p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+                            Filters
+                        </h3>
+<div class="flex flex-col gap-4">
+<!-- Rating Filter -->
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Rating</label>
+<div class="flex flex-wrap gap-2">
+<button class="bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm px-3 py-1.5 rounded-full hover:bg-primary/30 transition-colors">All</button>
+<button class="bg-surface-container text-on-surface-variant border border-white/10 font-label-sm text-label-sm px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors flex items-center gap-1">5 <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span></button>
+<button class="bg-surface-container text-on-surface-variant border border-white/10 font-label-sm text-label-sm px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors flex items-center gap-1">4 <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span></button>
+<button class="bg-surface-container text-on-surface-variant border border-white/10 font-label-sm text-label-sm px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors flex items-center gap-1">&lt; 3 <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span></button>
+</div>
+</div>
+<!-- Search by Customer -->
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Customer Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">person_search</span>
+<input class="w-full glass-input rounded-lg pl-9 pr-3 py-2 font-body-sm text-body-sm" placeholder="Search customer..." type="text"/>
+</div>
+</div>
+<!-- Search by Order -->
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Order ID</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">tag</span>
+<input class="w-full glass-input rounded-lg pl-9 pr-3 py-2 font-body-sm text-body-sm uppercase" placeholder="ORD-XXXXX" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Feedback Feed (8 columns) -->
+<div class="col-span-12 lg:col-span-8">
+<!-- Feed Header -->
+<div class="flex justify-between items-center mb-4 px-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Recent Feedback</span>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sort by:</span>
+<select class="glass-input rounded-md py-1 pl-2 pr-8 font-label-sm text-label-sm bg-transparent border-none focus:ring-0 appearance-none text-on-surface cursor-pointer">
+<option class="bg-surface text-on-surface">Newest First</option>
+<option class="bg-surface text-on-surface">Lowest Rating</option>
+<option class="bg-surface text-on-surface">Highest Rating</option>
+</select>
+</div>
+</div>
+<!-- Feedback List (Glass Cards) -->
+<div class="flex flex-col gap-4">
+<!-- Feedback Item 1 (5 Star) -->
+<div class="glass-panel rounded-xl p-6 hover:bg-white/5 transition-colors group cursor-default">
+<div class="flex justify-between items-start mb-3">
+<!-- User & Rating Info -->
+<div class="flex items-center gap-4">
+<img alt="Sarah Jenkins" class="w-12 h-12 rounded-full object-cover border border-white/10" data-alt="A small circular portrait of a smiling female customer, professional lighting, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADbvzhTBdYF-MvGu7BMhXiW5OBoUacDcqHV5uQk1rnRcbcnM6oBJKNaIZpVJsB4Mlme2x9-ksGHYP1daHzNMwYZMRE-4so-nOIwZiM1fQitOWAlbQT0Q91BbjeLrzNGqiLZB1uaYgnYrZEEIA54T1DpYfOwrjtERDyJSBt-sutjY6t2qpQf6CKEamJlx4LBjvkiC4A_93dv7mHbuGWdkXL8Sz9jI2zhGx8UdPTTUX_0mAFQ-6qdfSwOJ72ADxxywLkCKUNKfUy93Q"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-label-md text-label-md text-on-surface">Sarah Jenkins</h4>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">2 hours ago</span>
+</div>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<!-- Order Tag -->
+<a class="inline-flex items-center gap-1 bg-surface-container-high/50 hover:bg-primary/20 text-on-surface-variant hover:text-primary font-label-sm text-label-sm px-2 py-1 rounded border border-white/5 hover:border-primary/30 transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+                                    ORD-8942A
+                                </a>
+</div>
+<!-- Comment Content -->
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 pl-16">
+                                "The checkout process was incredibly smooth, and the customer service team was very helpful when I needed to update my shipping address. Highly recommend the enterprise tier!"
+                            </p>
+<!-- Actions -->
+<div class="pl-16 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">reply</span> Reply
+                                </button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">flag</span> Flag
+                                </button>
+</div>
+</div>
+<!-- Feedback Item 2 (3 Star - Neutral/Critical) -->
+<div class="glass-panel rounded-xl p-6 hover:bg-white/5 transition-colors group cursor-default">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/50 border border-white/10 flex items-center justify-center font-headline-md text-on-surface">MR</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-label-md text-label-md text-on-surface">Marcus Rodriguez</h4>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">5 hours ago</span>
+</div>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-inactive text-[16px]">star</span>
+<span class="material-symbols-outlined star-inactive text-[16px]">star</span>
+</div>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 bg-surface-container-high/50 hover:bg-primary/20 text-on-surface-variant hover:text-primary font-label-sm text-label-sm px-2 py-1 rounded border border-white/5 hover:border-primary/30 transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+                                    ORD-8911X
+                                </a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 pl-16">
+                                "The product quality is good, but the shipping took 3 days longer than expected. I tried tracking it on the portal but the status didn't update until it arrived."
+                            </p>
+<!-- Tag / Sentiment Label -->
+<div class="pl-16 mb-4 flex gap-2">
+<span class="bg-tertiary-container/20 text-tertiary-fixed font-label-sm text-[10px] uppercase tracking-wider px-2 py-1 rounded">Shipping Issue</span>
+</div>
+<div class="pl-16 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">reply</span> Reply
+                                </button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">task_alt</span> Resolve
+                                </button>
+</div>
+</div>
+<!-- Feedback Item 3 (5 Star) -->
+<div class="glass-panel rounded-xl p-6 hover:bg-white/5 transition-colors group cursor-default">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-4">
+<img alt="David Chen" class="w-12 h-12 rounded-full object-cover border border-white/10" data-alt="A small circular portrait of a focused male professional, dark theme background, subtle rim lighting, highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKjCVZ8aGybnm2iLXdGsr21kihnqdvvUFJ85IDgoeccOfjs4tufKyB8bg4cU5qHLsFyOk9LsAzxi5_Z0KNZVvpcCLlUg5Hjzy02joR3Kz_UFHA_g0ct7zCiPcwtmLpKTr7ucQTIE88sPM9nUKF57clYquL6D4GIuVVWcVUK_dFdIhM5x0ydy4AMeY-1FRoJc2OTpAOgFJbgz6U6hIBQicywb1tW65uhUPxBD8yojT7h5rulVisGXvR8BgjfIGNEeyDKFpjTBj-E0w"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-label-md text-label-md text-on-surface">David Chen</h4>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Yesterday</span>
+</div>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-active text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 bg-surface-container-high/50 hover:bg-primary/20 text-on-surface-variant hover:text-primary font-label-sm text-label-sm px-2 py-1 rounded border border-white/5 hover:border-primary/30 transition-colors" href="#">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+                                    ORD-8890C
+                                </a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 pl-16">
+                                "Fantastic experience all around. The new dashboard features made it incredibly easy to bulk order supplies for our offices. Will definitely be renewing our contract."
+                            </p>
+<div class="pl-16 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">reply</span> Reply
+                                </button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">favorite</span> Highlight
+                                </button>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-6 flex justify-center">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary px-6 py-2 rounded-full border border-white/10 hover:border-primary/30 hover:bg-primary/5 transition-all">
+                            Load More Feedback
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

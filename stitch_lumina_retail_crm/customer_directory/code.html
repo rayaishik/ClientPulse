@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customers Management - RetailCRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#263143",
+                        "inverse-surface": "#d4e4fa",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#004c69",
+                        "outline-variant": "#3c4a46",
+                        "on-tertiary-fixed": "#001e2c",
+                        "surface-variant": "#273647",
+                        "secondary-container": "#3e495d",
+                        "surface-container-lowest": "#010f1f",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#3cddc7",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "secondary-fixed": "#d8e3fb",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#5ec9ff",
+                        "tertiary": "#afe0ff",
+                        "on-surface": "#d4e4fa",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed": "#c4e7ff",
+                        "outline": "#859490",
+                        "on-tertiary": "#00354a",
+                        "on-secondary-container": "#aeb9d0",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-bright": "#2c3a4c",
+                        "inverse-on-surface": "#233143",
+                        "tertiary-fixed-dim": "#7bd0ff",
+                        "inverse-primary": "#006b5f",
+                        "surface-dim": "#051424",
+                        "on-tertiary-container": "#005371",
+                        "primary-fixed-dim": "#3cddc7",
+                        "on-background": "#d4e4fa",
+                        "background": "#051424",
+                        "primary-fixed": "#62fae3",
+                        "on-primary": "#003731",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "error": "#ffb4ab",
+                        "surface-container": "#122131",
+                        "secondary": "#bcc7de",
+                        "surface": "#051424",
+                        "primary-container": "#2dd4bf",
+                        "on-primary-container": "#00574d",
+                        "surface-container-highest": "#273647",
+                        "on-primary-fixed": "#00201c",
+                        "primary": "#57f1db",
+                        "on-surface-variant": "#bacac5",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "container-margin": "40px",
+                        "gutter": "20px",
+                        "xs": "4px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-table-row {
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .glass-table-row:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(5, 20, 36, 0.5); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(133, 148, 144, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(87, 241, 219, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-64 bg-surface dark:bg-surface bg-white/5 backdrop-blur-xl border-r border-white/10 shadow-xl flex flex-col h-full py-lg overflow-y-auto z-50 transition-transform duration-300 md:translate-x-0 -translate-x-full" id="side-nav">
+<div class="px-lg mb-xl flex items-center justify-between md:block">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">RetailCRM<br/><span class="text-on-surface-variant text-label-md block mt-1 font-normal uppercase tracking-widest">Enterprise Hub</span></h1>
+<button class="md:hidden text-on-surface-variant p-2" id="close-mobile-nav">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary bg-primary-container/20 border-r-4 border-primary shadow-[0_0_15px_rgba(87,241,219,0.3)] hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+                Customers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Products
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+                Support Tickets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">chat</span>
+                Feedback
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">badge</span>
+                Employees
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">history</span>
+                Activity Log
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">assessment</span>
+                Reports
+            </a>
+</div>
+<div class="mt-auto px-lg pt-lg border-t border-white/5">
+<div class="flex items-center gap-3">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-white/10" data-alt="A small circular avatar placeholder image depicting a generic abstract user profile silhouette in subtle grayscale tones against a dark navy background, suitable for a professional corporate dashboard UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvYf9x6P64edxOt8X4JTHukHdUK--Rn1UR_sZirbigqEz8MglCt1yN4BOqdTUwO1x6SGH7-2eIrBOx0xfJwnSA9kOPH4O5xOyEfIqCRAG0SKjl9sVAq6EC6x1obt2dinn-vf-QA1D9wMNMPXDjHwOYjsHniAV4AFqyuhW0a-bBWO_RRSzHh3ogyqxF2KiP2WWm5x1Ch73_K59LX6vlRl-3JvKNZh28ukaa5EuGvtVz37u3OEkIJE7Zr5ft0Co8uhgtLnd0hXTtYoQ"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin User</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">admin@retailcrm.com</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full md:w-[calc(100%-16rem)] h-screen overflow-hidden relative">
+<!-- Ambient Background Glow -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-tertiary-container/5 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/4"></div>
+<!-- TopNavBar -->
+<header class="bg-transparent docked full-width top-0 sticky z-40 bg-surface/30 backdrop-blur-md border-b border-white/5 shadow-sm flex justify-between items-center px-container-margin py-md w-full">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:bg-surface-variant/20 rounded-full p-2 transition-colors" id="open-mobile-nav">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:block">
+<!-- Page Context -->
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Customers</h2>
+</div>
+</div>
+<div class="flex-1 max-w-xl mx-4 hidden md:flex">
+<div class="relative w-full focus-within:ring-2 focus-within:ring-primary/50 rounded-lg group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-high/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary/50 focus:bg-surface-container-high/80 transition-all placeholder:text-on-surface-variant/50" placeholder="Search customers, emails, or IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:bg-surface-variant/20 rounded-full p-2 transition-colors focus-within:ring-2 focus-within:ring-primary/50 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant/20 rounded-full p-2 transition-colors focus-within:ring-2 focus-within:ring-primary/50">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-6 w-px bg-white/10 mx-2 hidden sm:block"></div>
+<div class="hidden sm:flex items-center gap-3 px-2 py-1 rounded-full hover:bg-surface-variant/20 transition-colors cursor-pointer">
+<span class="font-label-md text-label-md text-on-surface">Admin</span>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full border border-white/10" data-alt="Administrator Profile avatar placeholder, identical to the side nav avatar, showing a simple sleek profile icon on a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-XcRDhyACv1yA67fvrafZ8ZUnKSSH2ZcGp0WQYlVKNwZysYzFDgwr6JUb1uKBQvDYAZAVi7jmdYKKmtb4EPOdQZuHfJeD20seIjYM44l2X_n1Jn9itT7N8Aw5LH0dPhgozMcEBXQtuZt-lhmUs3vom_jWpYckRY0qsaE4Rs5ZaeCSCj0CQxRruUJkDBy3JbSwTM7On0q4nybU80fL9Ljg0OIWHrit_Ye7FElX5nHm3UtgOVGk33jLDcqPUpWmw57h6WOE3jsOBtc"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-4 md:p-container-margin w-full">
+<div class="max-w-7xl mx-auto flex flex-col gap-lg h-full">
+<!-- Action Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex items-center gap-4 w-full sm:w-auto">
+<!-- Mobile Search Toggle -->
+<div class="relative w-full sm:hidden">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary/50 transition-all" placeholder="Search..." type="text"/>
+</div>
+<!-- Filter Dropdown -->
+<div class="relative inline-block text-left glass-panel rounded-lg w-full sm:w-auto z-20">
+<button aria-expanded="false" aria-haspopup="true" class="inline-flex justify-between items-center w-full sm:w-48 px-4 py-2.5 text-body-sm font-body-sm text-on-surface hover:text-primary transition-colors focus:outline-none" id="filter-menu-button" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>Customer Type</span>
+</div>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<!-- Dropdown panel, hidden by default -->
+<div aria-labelledby="filter-menu-button" aria-orientation="vertical" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-xl glass-panel ring-1 ring-black ring-opacity-5 focus:outline-none" id="filter-dropdown" role="menu" tabindex="-1">
+<div class="py-1" role="none">
+<a class="text-on-surface block px-4 py-2 text-body-sm hover:bg-white/5 hover:text-primary transition-colors" href="#" id="filter-menu-item-0" role="menuitem" tabindex="-1">All Types</a>
+<a class="text-on-surface block px-4 py-2 text-body-sm hover:bg-white/5 hover:text-primary transition-colors" href="#" id="filter-menu-item-1" role="menuitem" tabindex="-1">VIP</a>
+<a class="text-on-surface block px-4 py-2 text-body-sm hover:bg-white/5 hover:text-primary transition-colors" href="#" id="filter-menu-item-2" role="menuitem" tabindex="-1">Regular</a>
+<a class="text-on-surface block px-4 py-2 text-body-sm hover:bg-white/5 hover:text-primary transition-colors" href="#" id="filter-menu-item-3" role="menuitem" tabindex="-1">Corporate</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Customer Button -->
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-[#00a896] hover:from-[#45e0c8] hover:to-[#008f7f] text-on-primary font-label-md text-label-md px-6 py-2.5 rounded-lg shadow-[0_4px_14px_rgba(87,241,219,0.25)] hover:shadow-[0_6px_20px_rgba(87,241,219,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+<span class="material-symbols-outlined text-sm font-bold">add</span>
+                        Add Customer
+                    </button>
+</div>
+<!-- Glass Table Container -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col flex-1 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead>
+<tr class="border-b border-white/10 bg-surface-container-high/30">
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10">Name</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10">Email</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10">Phone</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10 hidden md:table-cell">Address</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10">Customer Type</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10 hidden lg:table-cell">Registration Date</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider sticky top-0 bg-surface-container-high/90 backdrop-blur-md z-10 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-white/5">
+<!-- Row 1 -->
+<tr class="glass-table-row group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs border border-primary/30">
+                                                ES
+                                            </div>
+<span class="font-medium">Elena Smith</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">elena.smith@example.com</td>
+<td class="px-6 py-4 text-on-surface-variant">+1 (555) 123-4567</td>
+<td class="px-6 py-4 text-on-surface-variant hidden md:table-cell truncate max-w-[200px]">123 Tech Lane, San Francisco, CA</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary-container border border-tertiary-container/30">
+                                            VIP
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant hidden lg:table-cell">Oct 12, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-md transition-colors" title="Edit">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-md transition-colors" title="Delete">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="glass-table-row group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-surface flex items-center justify-center font-bold text-xs border border-white/10">
+                                                JD
+                                            </div>
+<span class="font-medium">James Doe</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">james.d@acmecorp.com</td>
+<td class="px-6 py-4 text-on-surface-variant">+1 (555) 987-6543</td>
+<td class="px-6 py-4 text-on-surface-variant hidden md:table-cell truncate max-w-[200px]">456 Corporate Blvd, New York, NY</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant border border-white/10">
+                                            Corporate
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant hidden lg:table-cell">Nov 05, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-md transition-colors" title="Edit">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-md transition-colors" title="Delete">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="glass-table-row group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-surface flex items-center justify-center font-bold text-xs border border-white/10">
+                                                MR
+                                            </div>
+<span class="font-medium">Maria Rodriguez</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">m.rodriguez@email.com</td>
+<td class="px-6 py-4 text-on-surface-variant">+1 (555) 333-2222</td>
+<td class="px-6 py-4 text-on-surface-variant hidden md:table-cell truncate max-w-[200px]">789 Palm Ave, Miami, FL</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant border border-white/10">
+                                            Regular
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant hidden lg:table-cell">Jan 15, 2024</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-md transition-colors" title="Edit">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-md transition-colors" title="Delete">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="glass-table-row group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs border border-primary/30">
+                                                AK
+                                            </div>
+<span class="font-medium">Alex Kim</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">alex.kim@startup.io</td>
+<td class="px-6 py-4 text-on-surface-variant">+1 (555) 777-8888</td>
+<td class="px-6 py-4 text-on-surface-variant hidden md:table-cell truncate max-w-[200px]">321 Innovation Dr, Austin, TX</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary-container border border-tertiary-container/30">
+                                            VIP
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant hidden lg:table-cell">Feb 02, 2024</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-md transition-colors" title="Edit">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-md transition-colors" title="Delete">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Empty state filler rows for aesthetics -->
+<tr class="glass-table-row opacity-50">
+<td class="px-6 py-4 text-center text-on-surface-variant italic" colspan="7">
+                                        Showing 4 of 245 customers
+                                    </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination/Footer -->
+<div class="border-t border-white/10 px-6 py-3 flex items-center justify-between bg-surface-container-high/30">
+<p class="font-body-sm text-body-sm text-on-surface-variant hidden sm:block">
+                            Page 1 of 25
+                        </p>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded transition-colors disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded font-medium">1</button>
+<button class="px-3 py-1 text-on-surface hover:text-primary hover:bg-white/5 rounded transition-colors">2</button>
+<button class="px-3 py-1 text-on-surface hover:text-primary hover:bg-white/5 rounded transition-colors">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="px-3 py-1 text-on-surface hover:text-primary hover:bg-white/5 rounded transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        // Simple Dropdown Toggle Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButton = document.getElementById('filter-menu-button');
+            const filterDropdown = document.getElementById('filter-dropdown');
+            
+            filterButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = filterButton.getAttribute('aria-expanded') === 'true';
+                filterButton.setAttribute('aria-expanded', !isExpanded);
+                filterDropdown.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!filterButton.contains(e.target) && !filterDropdown.contains(e.target)) {
+                    filterButton.setAttribute('aria-expanded', 'false');
+                    filterDropdown.classList.add('hidden');
+                }
+            });
+
+            // Mobile Nav Toggle
+            const openNav = document.getElementById('open-mobile-nav');
+            const closeNav = document.getElementById('close-mobile-nav');
+            const sideNav = document.getElementById('side-nav');
+
+            openNav?.addEventListener('click', () => {
+                sideNav.classList.remove('-translate-x-full');
+            });
+
+            closeNav?.addEventListener('click', () => {
+                sideNav.classList.add('-translate-x-full');
+            });
+        });
+    </script>
+</body></html>
