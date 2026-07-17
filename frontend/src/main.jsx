@@ -6,7 +6,7 @@ import './index.css';
 // Intercept fetch to dynamically append user role and EID headers
 const originalFetch = window.fetch;
 window.fetch = function (url, options = {}) {
-  const userStr = localStorage.getItem('crm_user');
+  const userStr = sessionStorage.getItem('crm_user');
   if (userStr) {
     const user = JSON.parse(userStr);
     options.headers = {
