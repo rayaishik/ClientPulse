@@ -232,7 +232,7 @@ export default function Employees() {
                     type="email"
                     required
                     className="input-glass rounded-lg px-3 py-2 text-body-sm text-on-surface"
-                    placeholder="e.g. souvik@retailcrm.com"
+                    placeholder="e.g. souvik@clientpulse.app"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />

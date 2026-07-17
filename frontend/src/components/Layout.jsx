@@ -70,8 +70,8 @@ export default function Layout({ children, user, onLogout }) {
             <span className="material-symbols-outlined text-primary font-bold">storefront</span>
           </div>
           <div>
-            <h1 className="font-headline-md text-headline-md font-bold text-primary leading-none">RetailCRM</h1>
-            <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">Enterprise Hub</p>
+            <h1 className="font-headline-md text-headline-md font-bold text-primary leading-none">ClientPulse</h1>
+            <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">CRM Workspace</p>
           </div>
         </div>
 

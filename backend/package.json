@@ -1,7 +1,7 @@
 {
-  "name": "crm-backend",
+  "name": "clientpulse-backend",
   "version": "1.0.0",
-  "description": "REST API backend for CRM Prototype",
+  "description": "REST API backend for ClientPulse CRM",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

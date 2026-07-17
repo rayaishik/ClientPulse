@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 
 export default function Login({ onLogin }) {
   const [role, setRole] = useState('Admin'); // 'Admin' or 'Employee'
-  const [email, setEmail] = useState('admin@retailcrm.com');
+  const [email, setEmail] = useState('admin1@clientpulse.app');
   const [password, setPassword] = useState('admin123');
 
   const handleRoleChange = (newRole) => {
     setRole(newRole);
     if (newRole === 'Admin') {
-      setEmail('admin@retailcrm.com');
+      setEmail('admin1@clientpulse.app');
       setPassword('admin123');
     } else {
-      setEmail('employee@retailcrm.com');
+      setEmail('employee1@clientpulse.app');
       setPassword('emp123');
     }
   };
@@ -20,15 +20,15 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     if (role === 'Admin') {
       onLogin({
-        name: 'Ananya Bose',
-        email: 'ananya.bose@retailcrm.com',
+        name: 'Admin User',
+        email: 'admin1@clientpulse.app',
         role: 'Admin',
         eid: 'E001'
       });
     } else {
       onLogin({
-        name: 'Souvik Dey',
-        email: 'souvik.dey@retailcrm.com',
+        name: 'Employee User',
+        email: 'employee1@clientpulse.app',
         role: 'Employee',
         eid: 'E002'
       });
@@ -53,8 +53,8 @@ export default function Login({ onLogin }) {
                 dashboard
               </span>
             </div>
-            <h1 className="font-display-lg text-display-lg text-on-background">RetailCRM</h1>
-            <p className="font-body-md text-body-md text-on-surface-variant">Sign in to your enterprise hub</p>
+            <h1 className="font-display-lg text-display-lg text-on-background">ClientPulse</h1>
+            <p className="font-body-md text-body-md text-on-surface-variant">Sign in to your workspace</p>
           </div>
 
           {/* Role Selector */}
@@ -99,7 +99,7 @@ export default function Login({ onLogin }) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={role === 'Admin' ? 'admin@retailcrm.com' : 'employee@retailcrm.com'}
+                  placeholder={role === 'Admin' ? 'admin1@clientpulse.app' : 'employee1@clientpulse.app'}
                   required
                 />
               </div>
