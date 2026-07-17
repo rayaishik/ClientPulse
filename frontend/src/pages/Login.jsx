@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 export default function Login({ onLogin }) {
   const [role, setRole] = useState('Admin'); // 'Admin' or 'Employee'
   const [email, setEmail] = useState('admin1@clientpulse.app');
-  const [password, setPassword] = useState('admin123');
+  const [password, setPassword] = useState('Demo@Admin#1');
 
   const handleRoleChange = (newRole) => {
     setRole(newRole);
     if (newRole === 'Admin') {
       setEmail('admin1@clientpulse.app');
-      setPassword('admin123');
+      setPassword('Demo@Admin#1');
     } else {
       setEmail('employee1@clientpulse.app');
-      setPassword('emp123');
+      setPassword('Demo@Emp#1');
     }
   };
 
@@ -86,7 +86,7 @@ export default function Login({ onLogin }) {
           </div>
 
           {/* Form */}
-          <form className="flex flex-col gap-md" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-md" onSubmit={handleSubmit} autoComplete="off">
             <div className="flex flex-col gap-xs">
               <label className="font-label-sm text-label-sm text-on-surface-variant" htmlFor="email">Email Address</label>
               <div className="relative flex items-center">
@@ -120,6 +120,7 @@ export default function Login({ onLogin }) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="new-password"
                   required
                 />
               </div>
