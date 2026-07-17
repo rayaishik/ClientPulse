@@ -1148,6 +1148,15 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
+// ─── Serve React Frontend (Production) ───────────────────────────────────────
+const frontendDist = path.resolve(__dirname, '..', 'frontend', 'dist');
+app.use(express.static(frontendDist));
+
+// Catch-all: serve React's index.html for any non-API route (React Router support)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDist, 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
